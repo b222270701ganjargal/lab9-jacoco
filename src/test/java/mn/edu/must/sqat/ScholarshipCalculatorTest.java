@@ -112,5 +112,10 @@ class ScholarshipCalculatorTest {
         assertEquals(3.0, calculator.gpa(new double[]{95, 85, 75}), 0.001);
     }
 
+    @Test
+    void letterGradeSixtyShouldBeD() {
+        assertEquals("D", calculator.letterGrade(60));
+    }
+
 
 }
