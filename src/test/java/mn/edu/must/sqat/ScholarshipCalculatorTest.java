@@ -109,13 +109,26 @@ class ScholarshipCalculatorTest {
 
     @Test
     void gpaMultipleElements() {
-        assertEquals(3.0, calculator.gpa(new double[]{95, 85, 75}), 0.001);
+        assertEquals(2.5, calculator.gpa(new double[]{95, 85, 75, 65}), 0.001);
     }
 
     @Test
     void letterGradeSixtyShouldBeD() {
         assertEquals("D", calculator.letterGrade(60));
     }
+
+@Test
+void letterGradeBoundaryValues() {
+    assertEquals("F", calculator.letterGrade(0));
+    assertEquals("F", calculator.letterGrade(59.99));
+    assertEquals("D", calculator.letterGrade(69.99));
+    assertEquals("C", calculator.letterGrade(70));
+    assertEquals("C", calculator.letterGrade(79.99));
+    assertEquals("B", calculator.letterGrade(80));
+    assertEquals("B", calculator.letterGrade(89.99));
+    assertEquals("A", calculator.letterGrade(90));
+    assertEquals("A", calculator.letterGrade(100));
+}
 
 
 }
