@@ -28,11 +28,11 @@ OpenJDK 64-Bit Server VM Temurin-17.0.8.1+1 (build 17.0.8.1+1, mixed mode, shari
 **`mvn -version`:**
 
 ```text
-Apache Maven 3.10.0
+Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)
 Maven home: C:\tools\apache-maven-3.10.0-bin\apache-maven-3.10.0
-Java version: 17.0.8.1, vendor: Eclipse Adoptium
-Default locale: en_US, platform encoding: Cp1252
-OS name: "windows 11", version: "10.0", arch: "amd64"
+Java version: 17.0.8.1, vendor: Eclipse Adoptium, runtime: C:\Users\gnjaa\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.8.101-hotspot
+Default locale: en_US, platform encoding: Cp1252, time zone: Asia/Ulaanbaatar
+OS name: "windows 11", version: "10.0", arch: "amd64", family: "windows"
 ```
 
 ## 3. Хэсэг A — Эхний тест ба хамралт
@@ -82,9 +82,9 @@ JaCoCo-ийн эхний үр дүн:
 |---|---|---|
 | 0 элемент | `{}` | `IllegalArgumentException` |
 | 1 элемент | `{95}` | 4.0 |
-| 2+ элемент | `{95, 85, 75}` | 3.0 |
+| 2+ элемент | `{95, 85, 75, 65}` | 2.5 |
 
-0 элементийн тестийг өмнөх хэсэгт бичсэн тул давхардуулаагүй.
+Давталтын 0, 1, 2+ удаагийн тохиолдлуудыг шалгах нь хоосон, ганц болон олон элементтэй массивыг зөв боловсруулж байгааг баталгаажуулна. Эдгээр тестүүд нь өмнө нь 100% хүрсэн Line болон Branch хамралтыг нэмэгдүүлэхгүй байж болох ч давталтын зааг дээрх логикийн алдааг илрүүлэхэд чухал юм.
 
 Нийт 18 тест амжилттай ажилласан.
 
@@ -116,7 +116,7 @@ expected: <D> but was: <F>
 BUILD FAILURE
 ```
 
-Унасан тестийн нотолгоо: `results/mvn-test-D-fail-utf8.txt`
+Унасан тестийн нотолгоо: `results/mvn-test-D-fail.txt`
 
 Алдааг дараах байдлаар зассан:
 
@@ -129,7 +129,7 @@ if (score >= 60) return "D";
 Эцсийн үр дүн:
 
 ```text
-Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -137,7 +137,10 @@ BUILD SUCCESS
 
 Алдааг илрүүлсэн болон зассан өөрчлөлтүүдийг тусдаа Git commit-оор хадгалсан.
 
+Branch coverage 100% болсон нь програмын бүх салааг тестээр гүйцэтгэсэн гэсэн үг боловч логик алдаагүйг бүрэн батлахгүй. `score > 60` болон `score >= 60` нөхцөлүүд нь өмнө ашигласан тестийн утгуудад ижил салааллын үр дүн өгч байсан учраас JaCoCo энэ алдааг илрүүлээгүй. Харин `letterGrade(60)` гэсэн зааг утгын тест нэмэхэд хүлээгдсэн `D` дүнгийн оронд `F` буцаж, алдаа илэрсэн. Үүнийг `score > 60` нөхцөлийг `score >= 60` болгон өөрчилж зассан бөгөөд дараа нь бүх тест амжилттай ажилласан. Иймээс кодын хамралт нь ямар мөр, салаанууд гүйцэтгэгдсэнийг хэмждэг боловч програмын үр дүн зөв эсэхийг батлахгүй тул зааг утгын тест зайлшгүй шаардлагатай юм.
+
 ## 7. Git-ийн ажлын түүх
+
 
 | Хэсэг | Commit | Тайлбар |
 |---|---|---|
